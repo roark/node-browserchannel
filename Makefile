@@ -68,7 +68,7 @@ dist/server.js: lib/server.coffee
 # At this time closure/bin/build/jscompiler.py uses whatever java
 # is currently in the path, and does not read $JAVA_HOME
 check-java:
-	java -version 2>&1 | grep -e "[^\d\.]1\.7"
+	java -version 2>&1 | grep -e "[^\d\.]1\.8"
 
 tmp/compiled-bcsocket.js: check-java tmp/bcsocket.js tmp/browserchannel.js
 	$(CLOSURE_BUILDER) $(CLOSURE_CFLAGS) > $@
