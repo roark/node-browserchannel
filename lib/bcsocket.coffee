@@ -279,7 +279,7 @@ BCSocket = (url, options) ->
     self.session = session = new goog.net.BrowserChannel options['appVersion'], lastSession?.getFirstTestResults()
     session.setSupportsCrossDomainXhrs true if options['crossDomainXhr']
     session.setHandler handler
-    session.setExtraHeaders extraHeaders if extraHeaders
+    session.setExtraHeaders options['extraHeaders'] if options['extraHeaders']
     lastErrorCode = null
 
     session.setFailFast yes if options['failFast']
@@ -292,9 +292,13 @@ BCSocket = (url, options) ->
 
   # This isn't in the normal websocket interface. It reopens a previously closed
   # websocket connection by reconnecting.
-  @['open'] = ->
+  @['open'] = (newOptions) ->
     # If the session is already open, you should call close() first.
     throw new Error 'Already open' unless self.readyState is self.CLOSED
+
+    if(options)
+      options = newOptions
+
     reconnect()
 
   # This closes the connection and stops it from reconnecting.
