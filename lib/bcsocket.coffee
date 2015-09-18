@@ -309,6 +309,9 @@ BCSocket = (url, options) ->
     # sure we don't try to reconnect.
     lastErrorCode = goog.net.BrowserChannel.Error.OK
 
+    # clear last session if manually closed
+    lastSession = null
+
     return if self.readyState is BCSocket.CLOSED
 
     setState BCSocket.CLOSING
