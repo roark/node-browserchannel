@@ -296,7 +296,7 @@ BCSocket = (url, options) ->
     # If the session is already open, you should call close() first.
     throw new Error 'Already open' unless self.readyState is self.CLOSED
 
-    if(options)
+    if(newOptions)
       options = newOptions
 
     reconnect()
